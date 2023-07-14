@@ -1,0 +1,19 @@
+---
+apiVersion: eksctl.io/v1alpha5
+kind: ClusterConfig
+metadata:
+  name: vinay-cluster
+  region: ap-south-1
+  version: "1.26"
+availabilityZones:
+  - ap-south-1a
+  - ap-south-1b
+managedNodeGroups:
+  - name: managednodes
+    labels:
+      roles: managed-nodes
+    instanceType: t2.medium
+    minSize: 2
+    maxSize: 5
+    desiredCapacity: 2
+    volumeSize: 20
