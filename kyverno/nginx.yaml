@@ -20,8 +20,8 @@ spec:
         image: nginx
         ports:
           - containerPort: 80
-        resources:
-          requests:
+        resources:   // intially try without resource block and check violation error, then try with resource block 
+          requests:  // you will able to see pods getting deployed 
             cpu: "100m"
             memory: "250Mi"
           limits:
