@@ -1,0 +1,57 @@
+pipeline {
+    agent any
+    tools {
+        maven 'maven'
+    }
+    stages{
+        stage("clone"){
+            steps{
+                git branch: 'feature', url: 'https://github.com/thehulkhunts/mydevopswork.git'
+            }
+        }
+        stage("static-code analysis"){
+            environment {
+                HOST = "-Dsonar.host.url=http://13.233.112.53:9000"
+                SONAR_LOGIN = "-Dsonar.login=165150b297c0765ec84c6471d7affdbad2a3a6c6"
+                
+            }
+            steps{
+                withSonarQubeEnv('sonar') {
+                  sh 'cd /var/lib/jenkins/workspace/feature-01-dev-qa-environment/java-spring-boot-app/ && mvn sonar:sonar'
+               }
+            }
+        }
+        stage("build"){
+            environment {
+                WORKDIR = "/var/lib/jenkins/workspace/feature-01-dev-qa-environment/java-spring-boot-app"
+            }
+            steps{
+                sh 'cd /var/lib/jenkins/workspace/feature-01-dev-qa-environment/java-spring-boot-app/ && mvn clean package'
+            }
+        }
+        stage("upload-artifact-nexus"){
+            steps{
+                nexusArtifactUploader artifacts: [
+                    [
+                        artifactId: 'spring-boot-demo',
+                        classifier: '',
+                        file: '/var/lib/jenkins/workspace/feature-01-dev-qa-environment/java-spring-boot-app/target/spring-boot-web.jar',
+                        type: 'jar'
+                        ]
+                        ],
+                        credentialsId: 'nexus',
+                        groupId: 'com.abhishek',
+                        nexusUrl: '172.31.34.199:8081',
+                        nexusVersion: 'nexus3',
+                        protocol: 'http',
+                        repository: 'spring-boot-repo', 
+                        version: '1.0'
+            }
+        }
+        stage("build docker image"){
+            steps{
+                sh 'cd /var/lib/jenkins/workspace/feature-01-dev-qa-environment/java-spring-boot-app/ && docker build -t java-app:release-1.0 .'
+            }
+        }
+    }
+}
