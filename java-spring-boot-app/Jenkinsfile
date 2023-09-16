@@ -13,8 +13,8 @@ pipeline {
         }
         stage("static-code analysis"){
             environment {
-                HOST = "-Dsonar.host.url=http://13.233.112.53:9000"
-                SONAR_LOGIN = "-Dsonar.login=165150b297c0765ec84c6471d7affdbad2a3a6c6"
+                HOST = "-Dsonar.host.url=http://13.232.48.40:9000"
+                SONAR_LOGIN = " -Dsonar.login=c7c974692a661f0d1ed530e692a3594b4c0cf618"
                 
             }
             steps{
@@ -43,7 +43,7 @@ pipeline {
                         ],
                         credentialsId: 'nexus',
                         groupId: 'com.abhishek',
-                        nexusUrl: '172.31.34.199:8081',
+                        nexusUrl: '172.31.46.148:8081',
                         nexusVersion: 'nexus3',
                         protocol: 'http',
                         repository: 'spring-boot-repo', 
@@ -55,7 +55,7 @@ pipeline {
                 sh 'cd /var/lib/jenkins/workspace/feature-01-dev-qa-environment/java-spring-boot-app/ && docker build -t java-app:release-1.0 .'
             }
         }
-          stage('Update Deployment File') {
+       /*   stage('Update Deployment File') {
         environment {
             GIT_REPO_NAME = "mydevopswork"
             GIT_USER_NAME = "thehulkhunts"
@@ -73,6 +73,6 @@ pipeline {
                 '''
             }
         }
-      }
+      } */
     }
 }
