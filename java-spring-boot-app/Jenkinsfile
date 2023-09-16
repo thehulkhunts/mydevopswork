@@ -66,8 +66,8 @@ pipeline {
                     git config user.email "vinayjadhav@gmail.com"
                     git config user.name "vinayjadhav"
                     BUILD_NUMBER=${BUILD_NUMBER}
-                    sed -i "s/replaceImageTag/${BUILD_NUMBER}/g" /spring-boot-app-manifests/deployment.yml
-                    git add /spring-boot-app-manifests/deployment.yml
+                    sed -i "s/replaceImageTag/${BUILD_NUMBER}/g" /var/lib/jenkins/workspace/feature-01-dev-qa-environment/java-spring-boot-app/spring-boot-app-manifests/deployment.yml
+                    git add /var/lib/jenkins/workspace/feature-01-dev-qa-environment/java-spring-boot-app/spring-boot-app-manifests/deployment.yml
                     git commit -m "Update deployment image to version ${BUILD_NUMBER}"
                     git push https://${GITHUB_TOKEN}@github.com/${GIT_USER_NAME}/${GIT_REPO_NAME} HEAD:feature
                 '''
