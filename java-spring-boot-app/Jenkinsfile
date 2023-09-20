@@ -9,7 +9,7 @@ pipeline {
     stages{
         stage("clone"){
             steps{
-                gitClone()
+                git branch: 'feature', url: 'https://github.com/thehulkhunts/mydevopswork.git'
             }
         }
         stage("static-code analysis"){
@@ -29,7 +29,7 @@ pipeline {
                 WORKDIR = "/var/lib/jenkins/workspace/feature-01-dev-qa-environment/java-spring-boot-app"
             }
             steps{
-               mvnBuild()
+              sh 'cd /var/lib/jenkins/workspace/feature-01-dev-qa-environment/java-spring-boot-app/ && mvn clean package'
             }
         }
         stage("upload-artifact-nexus"){
