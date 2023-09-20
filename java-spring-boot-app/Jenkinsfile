@@ -29,7 +29,7 @@ pipeline {
                 WORKDIR = "/var/lib/jenkins/workspace/feature-01-dev-qa-environment/java-spring-boot-app"
             }
             steps{
-                sh 'cd /var/lib/jenkins/workspace/feature-01-dev-qa-environment/java-spring-boot-app/ && mvn clean package'
+               mvnBuild()
             }
         }
         stage("upload-artifact-nexus"){
