@@ -1,5 +1,6 @@
 
 /* Jenkins file for CI */
+@Library("my-shared-library") _
 pipeline {
     agent any
     tools {
@@ -8,7 +9,7 @@ pipeline {
     stages{
         stage("clone"){
             steps{
-                git branch: 'feature', url: 'https://github.com/thehulkhunts/mydevopswork.git'
+                gitClone()
             }
         }
         stage("static-code analysis"){
