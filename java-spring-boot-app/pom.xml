@@ -6,7 +6,11 @@
 
     <groupId>com.abhishek</groupId>
     <artifactId>spring-boot-demo</artifactId>
+<<<<<<< HEAD
     <version>2.0</version>
+=======
+    <version>1.0</version>
+>>>>>>> cf39d2c3ed5e5713edcbe6929007996ec1112733
 
     <name>spring-boot-demo</name>
     <url></url>
@@ -72,4 +76,8 @@
     </build>
 
 
+<<<<<<< HEAD
 </project>
+=======
+</project>
+>>>>>>> cf39d2c3ed5e5713edcbe6929007996ec1112733
