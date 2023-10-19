@@ -1,9 +1,5 @@
 
 /* Jenkins file for CI */
-<<<<<<< HEAD
-=======
-@Library("my-shared-library") _
->>>>>>> cf39d2c3ed5e5713edcbe6929007996ec1112733
 pipeline {
     agent any
     tools {
@@ -12,23 +8,10 @@ pipeline {
     stages{
         stage("clone"){
             steps{
-<<<<<<< HEAD
                 git branch: 'master', url: 'https://github.com/thehulkhunts/mydevopswork.git'
-=======
-                git branch: 'feature', url: 'https://github.com/thehulkhunts/mydevopswork.git'
->>>>>>> cf39d2c3ed5e5713edcbe6929007996ec1112733
             }
         }
         stage("static-code analysis"){
-            environment {
-<<<<<<< HEAD
-                HOST = "-Dsonar.host.url=http://13.232.48.40:9000"
-=======
-                HOST = " -Dsonar.host.url=http://13.232.48.40:9000"
->>>>>>> cf39d2c3ed5e5713edcbe6929007996ec1112733
-                SONAR_LOGIN = " -Dsonar.login=c7c974692a661f0d1ed530e692a3594b4c0cf618"
-                
-            }
             steps{
                 withSonarQubeEnv('sonar') {
                   sh 'cd /var/lib/jenkins/workspace/feature-01-dev-qa-environment/java-spring-boot-app/ && mvn sonar:sonar'
@@ -40,11 +23,7 @@ pipeline {
                 WORKDIR = "/var/lib/jenkins/workspace/feature-01-dev-qa-environment/java-spring-boot-app"
             }
             steps{
-<<<<<<< HEAD
                 sh 'cd /var/lib/jenkins/workspace/feature-01-dev-qa-environment/java-spring-boot-app/ && mvn clean package'
-=======
-              sh 'cd /var/lib/jenkins/workspace/feature-01-dev-qa-environment/java-spring-boot-app/ && mvn clean package'
->>>>>>> cf39d2c3ed5e5713edcbe6929007996ec1112733
             }
         }
         stage("upload-artifact-nexus"){
@@ -63,11 +42,7 @@ pipeline {
                         nexusVersion: 'nexus3',
                         protocol: 'http',
                         repository: 'spring-boot-repo', 
-<<<<<<< HEAD
                         version: '2.0'
-=======
-                        version: '1.0'
->>>>>>> cf39d2c3ed5e5713edcbe6929007996ec1112733
             }
         }
         stage("build docker image"){
@@ -75,11 +50,8 @@ pipeline {
                 sh 'cd /var/lib/jenkins/workspace/feature-01-dev-qa-environment/java-spring-boot-app/ && docker build -t java-app:release-1.0 .'
             }
         }
-<<<<<<< HEAD
-       /*   stage('Update Deployment File') {
-=======
+
       /*    stage('Update Deployment File') {
->>>>>>> cf39d2c3ed5e5713edcbe6929007996ec1112733
         environment {
             GIT_REPO_NAME = "mydevopswork"
             GIT_USER_NAME = "thehulkhunts"
@@ -93,11 +65,9 @@ pipeline {
                     sed -i "s/replaceImageTag/${BUILD_NUMBER}/g" /var/lib/jenkins/workspace/feature-01-dev-qa-environment/java-spring-boot-app/spring-boot-app-manifests/deployment.yml
                     git add /var/lib/jenkins/workspace/feature-01-dev-qa-environment/java-spring-boot-app/spring-boot-app-manifests/deployment.yml
                     git commit -m "Update deployment image to version ${BUILD_NUMBER}"
-<<<<<<< HEAD
+
                     git push https://${GITHUB_TOKEN}@github.com/${GIT_USER_NAME}/${GIT_REPO_NAME} HEAD:master
-=======
-                    git push https://${GITHUB_TOKEN}@github.com/${GIT_USER_NAME}/${GIT_REPO_NAME} HEAD:feature
->>>>>>> cf39d2c3ed5e5713edcbe6929007996ec1112733
+    
                 '''
             }
         }
