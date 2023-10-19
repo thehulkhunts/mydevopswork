@@ -11,18 +11,13 @@ pipeline {
                 git branch: 'Release', url: 'https://github.com/thehulkhunts/mydevopswork.git'
             }
         }
-        stage("static-code analysis"){
-            environment {
-                HOST = " -Dsonar.host.url=http://13.232.48.40:9000"
-                SONAR_LOGIN = " -Dsonar.login=c7c974692a661f0d1ed530e692a3594b4c0cf618"
-                
-            }
+      /*  stage("static-code analysis"){
             steps{
                 withSonarQubeEnv('sonar') {
                   sh 'cd /var/lib/jenkins/workspace/feature-01-dev-qa-environment/java-spring-boot-app/ && mvn sonar:sonar'
                }
             }
-        }
+        } */
         stage("build"){
             environment {
                 WORKDIR = "/var/lib/jenkins/workspace/feature-01-dev-qa-environment/java-spring-boot-app"
@@ -31,7 +26,7 @@ pipeline {
                 sh 'cd /var/lib/jenkins/workspace/feature-01-dev-qa-environment/java-spring-boot-app/ && mvn clean package'
             }
         }
-        stage("upload-artifact-nexus"){
+     /*   stage("upload-artifact-nexus"){
             steps{
                 nexusArtifactUploader artifacts: [
                     [
@@ -49,7 +44,7 @@ pipeline {
                         repository: 'spring-boot-repo', 
                         version: '3.0'
             }
-        }
+        } */
         stage("build docker image"){
             steps{
                 sh 'cd /var/lib/jenkins/workspace/feature-01-dev-qa-environment/java-spring-boot-app/ && docker build -t java-app:release-1.0 .'
