@@ -35,7 +35,7 @@ pipeline {
                             steps{
                                 sh ''' 
                                 $SONAR_SCANNER/bin/sonar-scanner -Dsonar.host.url=http://13.126.157.39:9000/ \
-                                -Dsonar.login=squ_8a1c88c2ed8c54a139241b9d6c856f083a511ec8 \
+                                -Dsonar.login=sonar_auth_token \
                                 -Dsonar.projectKey=spring-boot-app \
                                 -Dsonar.projectName=spring-boot-app
                                 '''
