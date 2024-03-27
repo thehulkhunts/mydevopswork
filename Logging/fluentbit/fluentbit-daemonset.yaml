@@ -31,6 +31,10 @@ spec:
           value: "elasticsearch-master.default"
         - name: FLUENT_ELASTICSEARCH_PORT
           value: "9200"
+        - name: AWS_ACCESS_KEY_ID
+          value: "your access keys"
+        - name: AWS_SECRET_ACCESS_KEY
+          value: "your aws secret key"
         volumeMounts:
         - name: varlog
           mountPath: /var/log

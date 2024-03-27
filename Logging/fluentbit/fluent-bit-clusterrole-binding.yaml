@@ -3,11 +3,11 @@ kind: ClusterRoleBinding
 metadata:
   name: clusterrole-binding-fluent-bit
 subjects:
-- apiGroup: rbac.authorization.k8s.io 
-  kind: ServiceAccount
+- kind: ServiceAccount
   name: fluent-bit
+  namespace: logging
 roleRef:
   apiGroup: rbac.authorization.k8s.io
   kind: ClusterRole
   name: fluent-bit-role
-  namespace: logging
+ 

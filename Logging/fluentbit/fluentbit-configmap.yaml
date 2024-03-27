@@ -69,5 +69,5 @@ metadata:
     app.kubernetes.io/name: fluent-bit
     app.kubernetes.io/version: 1.7.9
     helm.sh/chart: fluent-bit-0.15.15
-  name: fluent-bit
+  name: fluent-bit-config
   namespace: logging
