@@ -1,0 +1,32 @@
+apiVersion: v1
+kind: ResourceQuota
+metadata:
+  name: spy-rq
+  namespace: spy
+spec:
+  hard:
+    limits:cpu: 5m
+    limits.memory: "1Gi"
+    requests.cpu: 2m
+    requests.memory: "512Mi"
+
+---
+apiVersion: v1
+kind: ResourceQuota
+metadata:
+  name: spy-podquota
+  namespace: spy
+spec:
+  hard:
+    pods: 20
+---
+apiVersion: v1
+kind: ResourceQuota
+metadata:
+  name: spy-rq
+  namespace: spy
+spec:
+  hard:
+    persistentvolumeclaims: 5
+    services.nodeports: 10
+    services.loadbalancers: 5
