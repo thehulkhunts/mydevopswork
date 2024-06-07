@@ -5,7 +5,7 @@ metadata:
   namespace: spy
 spec:
   hard:
-    limits:cpu: 5m
+    limits.cpu: 5m
     limits.memory: "1Gi"
     requests.cpu: 2m
     requests.memory: "512Mi"
@@ -23,7 +23,7 @@ spec:
 apiVersion: v1
 kind: ResourceQuota
 metadata:
-  name: spy-rq
+  name: spy-apiquota
   namespace: spy
 spec:
   hard:
