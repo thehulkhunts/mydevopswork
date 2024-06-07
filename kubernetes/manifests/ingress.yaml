@@ -1,0 +1,17 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: spy-ingress
+  namespace: spy
+spec:
+  ingressClassName: nginx
+  rules:
+  - https:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: svc-spy
+            port:
+              number: 80

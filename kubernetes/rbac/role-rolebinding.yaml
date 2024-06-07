@@ -1,0 +1,53 @@
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+  name: user-role
+  namespace: spy
+rules:
+- apiGroups:
+    - ""
+    - apps
+    - networking.k8s.io
+    - storage.k8s.io
+    - rbac.authorization.k8s.io
+    - extensions
+    - batch
+  resources:
+    - pods
+    - configmaps
+    - secrets
+    - services
+    - limiranges
+    - resourcequotas
+    - events
+    - deployments
+    - replicasets
+    - replicationcontrollers
+    - statefulsets
+    - daemonsets
+    - persistentvolumes
+    - persistentvolumeclaims
+    - ingresses
+    - storageclasses
+  verbs:
+    - get
+    - list
+    - watch
+    - create
+    - update
+    - delete
+
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: user-rolebinding
+  namespace: spy
+subjects:
+- kind: ServiceAccount
+  name: sa-spy
+  namespace: spy
+roleRef:
+  kind: role
+  name: user-role
+  apiGroup: rbac.authorization.k8s.io

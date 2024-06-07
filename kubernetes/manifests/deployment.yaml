@@ -1,0 +1,43 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mission-spy
+  namespace: spy
+  labels:
+    app: spy
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      kubernetes.io/app: spy
+  template:
+    metadata:
+      labels:
+        kubernetes.io/app: spy
+    spec:
+      affinity:
+        nodeAffinity:
+          preferredDuringSchedulingIgnoredDuringExecution:
+          - weight: 1
+            preference:
+              matchExpressions:
+              - key: node-name
+                operator: In
+                values:
+                - linux
+      containers:
+      - name: spy
+        image: vinayjadhav/mission:latest
+        imagePullPolicy: Always
+        ports:
+          - containerPort: 8080
+            name: http
+            protocol: TCP
+        resources:
+          limits:
+            cpu: "500m"
+            memory: "128Mi"
+          requests:
+            cpu: "500m"
+            memory: "128Mi"
+            
