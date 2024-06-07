@@ -48,6 +48,6 @@ subjects:
   name: sa-spy
   namespace: spy
 roleRef:
-  kind: role
+  kind: Role
   name: user-role
   apiGroup: rbac.authorization.k8s.io
