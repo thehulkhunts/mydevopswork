@@ -158,7 +158,7 @@ resource "aws_security_group" "vpc_sg" {
     content {
       from_port = egress.value.port
       to_port = egress.value.port
-      protocol = egress.value.port
+      protocol = egress.value.porotocol
       description = egress.value.description
       cidr_blocks = egress.value.cidr_blocks
     }
