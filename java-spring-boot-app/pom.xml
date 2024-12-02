@@ -97,18 +97,14 @@
 
             <!-- OWASP Dependency-Check Plugin -->
             <plugin>
-                <groupId>org.owasp</groupId>
-                <artifactId>dependency-check-maven</artifactId>
-                <version>8.4.0</version>
-                <executions>
-                    <execution>
-                        <phase>verify</phase>
-                        <goals>
-                            <goal>check</goal>
-                        </goals>
-                    </execution>
-                </executions>
-            </plugin>
+            <groupId>org.owasp</groupId>
+            <artifactId>dependency-check-maven</artifactId>
+            <version>8.4.0</version> <!-- Use the latest version -->
+            <configuration>
+                <format>XML</format>
+                <outputDirectory>${project.build.directory}/dependency-check-reports</outputDirectory>
+            </configuration>
+        </plugin>
 
         </plugins>
     </build>
