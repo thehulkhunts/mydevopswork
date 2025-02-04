@@ -6,8 +6,34 @@ metadata:
 spec:
   selector: 
     app: kibana
-  type: NodePort  
+  type: LoadBalancer  
   ports:
-    - port: 8080
+    - port: 80
       targetPort: 5601 
       nodePort: 30000
+
+#pre-requsite should be you need to configure load balancer controller in EKS cluster to use this ingress it should be "alb"
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: svc-ing-kibana
+  annotations:
+    alb.ingress.kubernetes.io/scheme: "internet-facing"
+    alb.ingress.kubernetes.io/target-type: "ip"
+    alb.ingress.kubernetes.io/healthcheck-path: /
+    alb.ingress.kubernetes.io/listen-ports: '[{"HTTP": 80}]'
+  labels:
+    name: kibana
+spec:
+  ingressClassName: alb
+  rules:
+  - http:
+      paths:
+      - pathType: Prefix
+        path: "/"
+        backend:
+          service:
+            name: kibana
+            port: 
+              number: 80
