@@ -36,7 +36,7 @@ jobs:
       - name: OWASP Dependency Check
         working-directory: ${{ env.APP_DIR }}
         run: |
-          mvn org.owasp:dependency-check-maven:check \
+          mvn org.owasp:dependency-check-maven:12.1.8:check \
             -DfailBuildOnCVSS=7 
 
       - name: Upload artifact
