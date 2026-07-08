@@ -36,6 +36,16 @@ jobs:
         with:
           name: springboot-jar
           path: java-spring-boot-app/target/*.jar
+          
+      - name: Build Docker Image
+        working-directory: ${{env.IMAGE_NAME}}
+        run: |
+          docker build -t \
+          $IMAGE_NAME:${{github.sha}} \
+          .
+      - name: Verify docker images
+        run: docker images
+        
       
 
           
