@@ -15,6 +15,7 @@ permissions:
 env:
   APP_DIR: java-spring-boot-app
   IMAGE_NAME: java-spring-boot-app
+  DEPENDENCY_CHECK_DATA: ~/.dependency-check
   
 jobs:
   build:
@@ -33,12 +34,18 @@ jobs:
         working-directory: ${{env.APP_DIR}}
         run: mvn clean package
 
-      - name: OWASP Dependency Check
-        uses: dependency-check/Dependency-Check_Action@main
+      - name: Cache Dependency-Check Data
+        uses: actions/cache@v4
         with:
-          project: springboot-app
-          path: java-spring-boot-app
-          format: HTML
+          path: $${{env.DEPENDENCY_CHECK_DATA}}
+          key: dependency-check-${{ runner.os }}
+
+      - name: OWASP Dependency Check
+        working-directory: ${{env.APP_DIR}}
+        run: |
+          mvn org.owasp:dependency-check-maven:12.1.8:check \
+             -DnvdApiKey=${{ secrets.NVD_API_KEY }} \
+             -DdataDirectory=$DEPENDENCY_CHECK_DATA
      
       - name: Upload artifact
         uses: actions/upload-artifact@v4
