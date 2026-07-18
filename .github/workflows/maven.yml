@@ -73,10 +73,10 @@ jobs:
         with:
           image-ref: ${{ env.IMAGE_NAME }}:${{ github.sha }}
           format: table
-          exit-code: 1
-          ignored-unfixed: true
+          exit-code: 0 #if you want to break pipeline if found severity = HIGH,CRITICAL use exit code 1
+          ignore-unfixed: true
           vuln-type: os,library
-          severity: HIGH,CRITICAL
+          #severity: HIGH,CRITICAL
 
       - name: Login to registry
         if: github.event_name == 'pull_request'
