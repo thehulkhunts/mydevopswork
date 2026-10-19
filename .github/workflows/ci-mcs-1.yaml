@@ -9,6 +9,8 @@ on:
     paths:
         - 'java-spring-boot-app/**'
         - '.github/workflows/ci-mcs-1.yaml'
+    pull_request:
+      - master
 
   workflow_dispatch:
     inputs:
