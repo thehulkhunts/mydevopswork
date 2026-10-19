@@ -5,7 +5,7 @@ on:
     branches:
       - master
       - develop
-      - thehulkhunts-patch-1
+      #- thehulkhunts-patch-1
     paths:
         - 'java-spring-boot-app/**'
         - '.github/workflows/ci-mcs-1.yaml'

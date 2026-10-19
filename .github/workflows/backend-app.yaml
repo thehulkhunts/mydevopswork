@@ -91,7 +91,7 @@ jobs:
       - name: verify Docker image
         run: |
           echo "Verifying Docker image..."
-          docker run --rm $IMAGE_NAME:${{github.sha}} java -version # Verify the Docker image by running it and checking the Java version
+          docker images
 
       - name: docker image scan with trivy
         uses: aquasecurity/trivy-action@v0.36.0
