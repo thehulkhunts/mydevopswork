@@ -1,0 +1,32 @@
+name: ci/cd java-spring-boot-app
+
+on:
+  push:
+    branches:
+      - master
+      - develop
+      - thehulkhunts-patch-1
+    paths:
+        - 'java-spring-boot-app/**'
+        - '.github/workflows/ci-mcs-1.yaml'
+
+  workflow_dispatch:
+    inputs:
+      ref:
+        description: 'branch to build'
+        required: false
+        default: 'thehulkhunts-patch-1'
+
+permissions:
+  contents: read
+  id-token: write
+  security-events: read
+  pull-requests: read
+  actions: read
+
+jobs:
+  build-and-test:
+    uses: ./.github/workflows/backend-app.yaml
+    with:
+      service-dir: 'java-spring-boot-app'
+    secrets: inherit
