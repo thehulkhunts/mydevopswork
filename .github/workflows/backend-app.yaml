@@ -114,10 +114,10 @@ jobs:
           echo "Tagging Docker image..."
           docker tag $IMAGE_NAME:${{github.sha}} ${{ secrets.DOCKER_USERNAME }}/$IMAGE_NAME:gha-latest # Tag the Docker image with the short SHA
 
-      - name: push docker image to registry
-        run: |
-          echo "Pushing Docker image to registry..."
-          docker push ${{ secrets.DOCKER_USERNAME }}/$IMAGE_NAME:${{github.sha}} # Push the Docker image to the registry
+      # - name: push docker image to registry
+      #   run: |
+      #     echo "Pushing Docker image to registry..."
+      #     docker push ${{ secrets.DOCKER_USERNAME }}/$IMAGE_NAME:${{github.sha}} # Push the Docker image to the registry
 
           
         
