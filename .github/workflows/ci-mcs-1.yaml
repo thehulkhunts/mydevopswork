@@ -17,6 +17,12 @@ on:
       ref:
         description: 'branch to build'
         required: false
+        type: choice
+        options:
+          - develop
+          - thehulkhunts-patch-1
+          - master
+          - feature
         default: 'thehulkhunts-patch-1'
 
 permissions:
