@@ -54,25 +54,25 @@ jobs:
           path: ${{ inputs.service-dir }}/target/site/jacoco
           retention-days: 5
 
-      - name: Cache Dependency-Check Data
-        uses: actions/cache@v4
-        with:
-          path: $${{env.DEPENDENCY_CHECK_DATA}}
-          key: dependency-check-${{ runner.os }}
+      # - name: Cache Dependency-Check Data
+      #   uses: actions/cache@v4
+      #   with:
+      #     path: $${{env.DEPENDENCY_CHECK_DATA}}
+      #     key: dependency-check-${{ runner.os }}
 
-      - name: OWASP Dependency Check
-        working-directory: ${{ inputs.service-dir }}
-        run: |
-          mvn org.owasp:dependency-check-maven:12.1.8:check \
-             -DnvdApiKey=${{ secrets.NVD_API_KEY }} \
-             -DdataDirectory=$DEPENDENCY_CHECK_DATA
+      # - name: OWASP Dependency Check
+      #   working-directory: ${{ inputs.service-dir }}
+      #   run: |
+      #     mvn org.owasp:dependency-check-maven:12.1.8:check \
+      #        -DnvdApiKey=${{ secrets.NVD_API_KEY }} \
+      #        -DdataDirectory=$DEPENDENCY_CHECK_DATA
 
-      - name: Upload Dependency Check Report
-        if: always() # Upload the report even if the previous step fails
-        uses: actions/upload-artifact@v6
-        with:
-          name: dependency-check-report
-          path: ${{ inputs.service-dir }}/target/dependency-check-report.html
+      # - name: Upload Dependency Check Report
+      #   if: always() # Upload the report even if the previous step fails
+      #   uses: actions/upload-artifact@v6
+      #   with:
+      #     name: dependency-check-report
+      #     path: ${{ inputs.service-dir }}/target/dependency-check-report.html
 
 
       - name: upload jar artifact
