@@ -3,7 +3,7 @@ name: ci/cd java-spring-boot-app
 on:
   push:
     branches:
-      - master
+      #- master
       - develop
       #- thehulkhunts-patch-1
     paths:
