@@ -117,7 +117,7 @@ jobs:
       - name: push docker image to registry
         run: |
           echo "Pushing Docker image to registry..."
-          docker push ${{ secrets.DOCKER_USERNAME }}/$IMAGE_NAME:${{github.sha}} # Push the Docker image to the registry
+          docker push ${{ secrets.DOCKER_USERNAME }}/$IMAGE_NAME:gha-latest # Push the Docker image to the registry
 
           
         
