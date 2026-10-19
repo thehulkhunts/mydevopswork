@@ -96,7 +96,7 @@ jobs:
       - name: docker image scan with trivy
         uses: aquasecurity/trivy-action@v0.36.0
         with:
-          image-ref: $IMAGE_NAME:${{github.sha}} # Scan the Docker image for vulnerabilities using Trivy
+          image-ref: ${{env.IMAGE_NAME}}:${{github.sha}} # Scan the Docker image for vulnerabilities using Trivy
           format: 'table'
           exit-code: '0' # Exit with code 1 if vulnerabilities are found
           #severity: 'CRITICAL,HIGH' # Only consider critical and high severity vulnerabilities
